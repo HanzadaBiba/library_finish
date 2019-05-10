@@ -1,0 +1,28 @@
+<ul class="pagination">
+
+                            {%	if	page.has_previous.has_previos	%}
+<li>                                        <a	href="?page={{ page.previous_page_number.previous_page_number	}}">{{ page.previous_page_number.previous_page_number }}</a></li>
+
+	{%	endif	%}
+
+
+                            {%	if	page.has_previous	%}
+<li>                                        <a	href="?page={{ page.previous_page_number	}}">{{ page.previous_page_number }}</a></li>
+
+	{%	endif	%}
+
+
+							<li class="active"><a href="#" >{{ page.number}}</a></li>
+
+                            {%	if	page.has_next	%}
+<li>                                        <a	href="?page={{ page.next_page_number	}}">{{ page.next_page_number }}</a></li>
+
+	{%	endif	%}
+
+                            {%	if	page.has_next.has_next	%}
+<li>                                        <a	href="?page={{ page.next_page_number.next_page_number	}}">{{ page.next_page_number.next_page_number }}</a></li>
+
+	{%	endif	%}
+
+
+						</ul>

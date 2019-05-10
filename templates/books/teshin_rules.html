@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Техника қауіпсіздік ережесі
+{% endblock %}
+{% block content %}
+
+<header id="header"><!--header-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="logo "><a href="{% url 'home:home' %}"><img src="{% static 'images/home/logo.png' %}" alt="" width="150"/></a>
+					</div>
+
+					</div>
+                    <div class="col-sm-5">
+						<div class="logo pull-left">
+					<h1>3 Талапкер орта мектебі</h1>
+                        </div>
+
+					</div>
+
+					<div class="col-sm-4">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav lock">
+
+						                  {% if request.user.is_authenticated %}
+			<li><a href="{% url 'registration:logout' %}"><i class="fa fa-lock"></i> Шығу</a></li>
+
+                            {% else %}
+
+								<li><a href="{% url 'registration:login' %}"><i class="fa fa-lock"></i> Кіру</a></li>
+								<li><a href="{% url 'registration:register' %}"><i class="fa fa-lock"></i> Тіркелу</a></li>
+							{% endif %}
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-12">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'home:home' %}" >Кітапхана</a></li>
+								<li><a href="{% url 'home:book_list' %}">Кітаптар</a></li>
+<li><a href="{% url 'home:author_list' %}">Авторлар</a></li>
+
+								<li class="dropdown"><a href="#">Ережелер<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+
+                                        <li><a href="{% url 'home:book_rules' %}">Кітапхана ережесі</a></li>
+                                        <li><a href="{% url 'home:teshin_rules' %}" class="active">Техника қауіпсіздік ережесі</a></li>
+                                        <li><a href="{% url 'home:read_rules' %}">Оқулық қолдану ережесі</a></li>
+                                    </ul>
+                                </li>
+
+	                			<li><a href="{% url 'home:library_best' %}">Кітапхана белсенділері</a></li>
+
+
+                                <li><a href="{% url 'home:about_us' %}">Кітапхана туралы</a></li>
+								<li><a href="{% url 'home:contact_us' %}">Бізге хат</a></li>
+
+
+
+							</ul>
+						</div>
+					</div></div>
+
+
+
+            </div>
+
+				</div>
+
+
+	</header><!--/header-->
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Жанрлар</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							{% for genre in genres %}
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="{{ genre.get_absolute_url }}"><span class="pull-right">({{ genre.genre_book.count }})</span>{{ genre.name }}</a></h4>
+								</div>
+							</div>
+
+							{% endfor %}
+
+
+						</div><!--/category-products-->
+
+						<div class="brands_products"><!--brands_products-->
+							<h2>Авторлар</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+                                    {% for author in authors %}
+									<li><a href="{{ author.get_absolute_url }}"> <span class="pull-right">({{ author.author_book.count }})</span>{{ author.name }}</a></li>
+
+                                    {% endfor %}
+
+									</ul>
+							</div>
+						</div><!--/brands_products-->
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+                    <h2 class="title text-center">Техника қауіпсіздік ережесі</h2>
+
+<h1>Оқушылар назарына!</h1>
+                    <ul>
+                        <li>1.  Оқу бөлмесіне бір-біріңді итермей кіру керек.</li>
+                        <li>2. Өзіңнен үлкен немесе қыз баланы бірінші    жіберу керек.</li>
+                        <li>3. Қоңырау уақытында қатты сөйлемеу керек, жаныңдағы адамды тыңдай біл, қоңырау уақытында демалуды ұмытпау керек.</li>
+                        <li>4. Қоңырау уақытында оқу бөлмесінде жүгірмеу керек, сыныптастарыңды жарақаттандырып алмас үшін қимыл ойындарын ойнамау керек.</li>
+    <li>5. Көршіңнің көзін жарақаттамау үшін сызғыш,қарындаш, қаламмен жұмыс істегенде жан-жағыңдағыларға абай болу керек.</li>
+    <li>6. ТҚО (ТСО) сабағында қолданғанда есте сақта:</li>
+<ul>
+    <li>• электор шнур вилкадан ұстау керек</li>
+    <li>• ТҚО қолданғаннан кейін өшіруді ұмытпау керек</li>
+    <li>• дымқыл шүберекпен сыныпта тазалық жасағанда ТҚО жақпа</li>
+</ul>
+
+    <li> 7.  Өзіңді өзің нашар сезінсең, мұғалімге немесе мектеп медбикесіне хабарласу керек.</li>
+</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
+

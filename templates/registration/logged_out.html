@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<header id="header"><!--header-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo ">
+					<a href="{% url 'home:home' %}"><img src="{% static 'images/home/logo.png' %}" alt="" width="150"/></a>
+						</div>
+
+					</div>
+                    <div class="col-sm-4">
+						<div class="logo pull-left">
+					<h1>3 Талапкер орта мектебі</h1>
+                        </div>
+
+					</div>
+
+					<div class="col-sm-4">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+         {% if request.user.is_authenticated %}
+			<li><a href="{% url 'registration:logout' %}"><i class="fa fa-lock"></i> Шығу</a></li>
+
+                            {% else %}
+
+								<li><a href="{% url 'registration:login' %}"><i class="fa fa-lock"></i> Кіру</a></li>
+								<li><a href="{% url 'registration:register' %}"><i class="fa fa-lock"></i> Тіркелу</a></li>
+							{% endif %}
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-11">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'home:home' %}" class="active">Кітапхана</a></li>
+								<li><a href="{% url 'home:book_list' %}">Кітаптар</a></li>
+								<li class="dropdown"><a href="#">Ережелер<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+
+                                        <li><a href="{% url 'home:book_rules' %}">Кітапхана ережесі</a></li>
+                                        <li><a href="{% url 'home:teshin_rules' %}">Техника қауіпсіздік ережесі</a></li>
+                                        <li><a href="{% url 'home:read_rules' %}">Оқулық қолдану ережесі</a></li>
+                                    </ul>
+                                </li>
+
+	                			<li><a href="{% url 'home:library_best' %}">Кітапхана белсенділері</a></li>
+
+
+                                <li><a href="{% url 'home:about_us' %}">Кітапхана туралы</a></li>
+								<li><a href="{% url 'home:contact_us' %}">Бізге хат</a></li>
+
+
+
+							</ul>
+						</div>
+					</div>
+                	<div class="col-sm-1">
+						<div class="search_box pull-right">
+                            <form action="" method="get">
+                        {% csrf_token %}
+                            							<input type="text" class="text" name="q" placeholder="Іздеу" />
+
+                            </form>
+							</div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+				</div>
+
+
+
+	</header><!--/header-->
+
+	<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-3 ">
+
+				</div>
+				<div class="col-sm-6">
+					    <div id="content">
+				<div class="inner">
+<h1>Сайттан шығу</h1>
+<p>Сіз сайттан сәтті шықтыңыз.	Сіз қайта <a href= "{%url "registration:login"%} " >кіре аласыз</a>.</p>
+                </div>
+    </div>
+
+				</div>
+
+				<div class="col-sm-3 ">
+
+				</div>
+			</div>
+		</div>
+	</section>
+    <br><br>
+
+
+
+{% endblock %}
+{% block title %}
+Шыгу
+
+{% endblock %}

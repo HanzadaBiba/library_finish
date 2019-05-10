@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Кітапхана туралы
+
+{% endblock %}
+{% block content %}
+
+<header id="header"><!--header-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="logo ">
+                            <a href="{% url 'home:home' %}"><img src="{% static 'images/home/logo.png' %}" alt="" width="150"/></a>
+
+                        </div>
+
+					</div>
+                    <div class="col-sm-5">
+						<div class="logo pull-left">
+					<h1>3 Талапкер орта мектебі</h1>
+                        </div>
+
+					</div>
+
+					<div class="col-sm-4">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav lock">
+
+						                  {% if request.user.is_authenticated %}
+			<li><a href="{% url 'registration:logout' %}"><i class="fa fa-lock"></i> Шығу</a></li>
+
+                            {% else %}
+
+								<li><a href="{% url 'registration:login' %}"><i class="fa fa-lock"></i> Кіру</a></li>
+								<li><a href="{% url 'registration:register' %}"><i class="fa fa-lock"></i> Тіркелу</a></li>
+							{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-12">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'home:home' %}" >Кітапхана</a></li>
+								<li><a href="{% url 'home:book_list' %}">Кітаптар</a></li>
+
+								<li><a href="{% url 'home:author_list' %}">Авторлар</a></li>
+                                <li class="dropdown"><a href="#">Ережелер<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+
+                                        <li><a href="{% url 'home:book_rules' %}">Кітапхана ережесі</a></li>
+                                        <li><a href="{% url 'home:teshin_rules' %}">Техника қауіпсіздік ережесі</a></li>
+                                        <li><a href="{% url 'home:read_rules' %}">Оқулық қолдану ережесі</a></li>
+                                    </ul>
+                                </li>
+
+	                			<li><a href="{% url 'home:library_best' %}">Кітапхана белсенділері</a></li>
+
+
+                                <li><a href="{% url 'home:about_us' %}" class="active">Кітапхана туралы</a></li>
+								<li><a href="{% url 'home:contact_us' %}">Бізге хат</a></li>
+
+
+
+							</ul>
+						</div>
+					</div></div>
+
+
+
+            </div>
+
+				</div>
+
+
+
+	</header><!--/header-->
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Жанрлар</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							{% for genre in genres %}
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="{{ genre.get_absolute_url }}"><span class="pull-right">({{ genre.genre_book.count }})</span>{{ genre.name }}</a></h4>
+								</div>
+							</div>
+
+							{% endfor %}
+
+
+						</div><!--/category-products-->
+
+						<div class="brands_products"><!--brands_products-->
+							<h2>Авторлар</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+                                    {% for author in authors %}
+									<li><a href="{{ author.get_absolute_url }}"> <span class="pull-right">({{ author.author_book.count }})</span>{{ author.name }}</a></li>
+
+                                    {% endfor %}
+
+									</ul>
+							</div>
+						</div><!--/brands_products-->
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+                    <h2 class="title text-center">Кітапхана туралы</h2>
+                     <div class="slider">
+    <div class="slider__wrapper">
+      <div class="slider__item">
+        <div style="height: 350px; background: lightgrey;">
+            <img  src="{% static 'library.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div style="height: 350px; background: green;">
+             <img  src="{% static 'slide1.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div style="height: 350px; background: violet;">
+            <img  src="{% static 'slide2.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div style="height: 350px; background: coral;">
+            <img  src="{% static 'slide3.jpg' %}" alt="">
+        </div>
+      </div>
+    </div>
+    <a class="slider__control slider__control_left" href="#" role="button"></a>
+    <a class="slider__control slider__control_right slider__control_show" href="#" role="button"></a>
+  </div>
+
+                    <div class="aboutlibrary">
+                        <hr>
+                <p>Тәуелсіз Қазақстанның келешегі – жас ұрпақты тәрбиелейтін мектеп дейтін болсақ, осы мектепте орналасқан кітапхана да сол міндетт бірге атқарады. Мектеп кітапханасы – мектептің бір бөлігі. Жаңа заман компьютер дәуірі болғанымен, рухани азық іздеген, көзі ашық, көкірегі ояу әрбір адам кітапханаға келіп, әдеби көркем шығармаларды, түрлі газет-журналдарды оқып, мерейі өсіп, рухани азық алып, дөңгеленген дүниеден хабардар болатыны сөзсіз.
+№3 Талапкер орта мектебінің жаңа кітапханасы 2013 жылы жаңа мектеп тапсыру  негізінде құрылды.
+
+
+
+Қазір бұл кітапханада 8800-ге жуық кітап қоры бар, оның ішінде мектеп оқулықтары- 7100, жаңа шыққан оқулықтар- 3200, жалпы оқырмандар саны- 890, оның ішінде 750-мектеп шәкірттері. Әртүрлі ғылыми-әдістемелік, көркем және педагогикалық әдебиеттер мен мерзімді баспа басылымдары, қазақ, орыс және ағылшын тілдеріндегі журналдар оқырмандар тілегінен шығып жатады. Жылдан-жылға кітапханамыз жаңа оқулықтар және әдістемелік оқу құралдарымен, көрнекіліктермен, географиялық карталармен,  электрондық оқулықтармен, әдеби кітаптармен толықтырылып отырады.  Мектепте жыл сайын газет-журналдарға жазылу өз деңгейінде өтеді.
+ «Кітап – білім бұлағы» демекші, осынау білімнің тұнық та мөлдір бұлағынан шәкірттерді сусындатып, олардың рухани дүниесін молайтып, тағылымы мол тәрбие ошағына айналып отырған мектебіміздің кітапханасында оқушыларды заман талабына сай ақпараттық технологиямен, ғаламтормен жұмыс жасауға бейімдеп, қазіргі заманға сай оқырмандардың ойын ұшқырлайтын танымдық кештер, мерекелік іс-шаралар, кездесу кештері, кітапханалық сабақтар өткізіліп, көрмелер ұйымдастырылып тұрады.
+Кітапханадағы іс-шаралардың барлығы да интерактивті жүйеде, слайд-презентациялар арқылы жүргізіледі. Оқырмандарға арналып әртүрлі тақырыптағы: «Тәуелсіздік – тұғырым», «Мемлекекттік
+
+тіл», «Мерейлі отбасы», «Тарихи тұлғалар» және тағы басқа да кітап көрмелері ұйымдастырылып отырады.
+</p>
+<hr>
+                    </div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+<script>
+    'use strict';
+    var multiItemSlider = (function () {
+      return function (selector, config) {
+        var
+          _mainElement = document.querySelector(selector), // основный элемент блока
+          _sliderWrapper = _mainElement.querySelector('.slider__wrapper'), // обертка для .slider-item
+          _sliderItems = _mainElement.querySelectorAll('.slider__item'), // элементы (.slider-item)
+          _sliderControls = _mainElement.querySelectorAll('.slider__control'), // элементы управления
+          _sliderControlLeft = _mainElement.querySelector('.slider__control_left'), // кнопка "LEFT"
+          _sliderControlRight = _mainElement.querySelector('.slider__control_right'), // кнопка "RIGHT"
+          _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width), // ширина обёртки
+          _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width), // ширина одного элемента
+          _positionLeftItem = 0, // позиция левого активного элемента
+          _transform = 0, // значение транфсофрмации .slider_wrapper
+          _step = _itemWidth / _wrapperWidth * 100, // величина шага (для трансформации)
+          _items = []; // массив элементов
+        // наполнение массива _items
+        _sliderItems.forEach(function (item, index) {
+          _items.push({ item: item, position: index, transform: 0 });
+        });
+
+        var position = {
+          getMin: 0,
+          getMax: _items.length - 1,
+        }
+
+        var _transformItem = function (direction) {
+          if (direction === 'right') {
+            if ((_positionLeftItem + _wrapperWidth / _itemWidth - 1) >= position.getMax) {
+              return;
+            }
+            if (!_sliderControlLeft.classList.contains('slider__control_show')) {
+              _sliderControlLeft.classList.add('slider__control_show');
+            }
+            if (_sliderControlRight.classList.contains('slider__control_show') && (_positionLeftItem + _wrapperWidth / _itemWidth) >= position.getMax) {
+              _sliderControlRight.classList.remove('slider__control_show');
+            }
+            _positionLeftItem++;
+            _transform -= _step;
+          }
+          if (direction === 'left') {
+            if (_positionLeftItem <= position.getMin) {
+              return;
+            }
+            if (!_sliderControlRight.classList.contains('slider__control_show')) {
+              _sliderControlRight.classList.add('slider__control_show');
+            }
+            if (_sliderControlLeft.classList.contains('slider__control_show') && _positionLeftItem - 1 <= position.getMin) {
+              _sliderControlLeft.classList.remove('slider__control_show');
+            }
+            _positionLeftItem--;
+            _transform += _step;
+          }
+          _sliderWrapper.style.transform = 'translateX(' + _transform + '%)';
+        }
+
+        // обработчик события click для кнопок "назад" и "вперед"
+        var _controlClick = function (e) {
+          var direction = this.classList.contains('slider__control_right') ? 'right' : 'left';
+          e.preventDefault();
+          _transformItem(direction);
+        };
+
+        var _setUpListeners = function () {
+          // добавление к кнопкам "назад" и "вперед" обрботчика _controlClick для событя click
+          _sliderControls.forEach(function (item) {
+            item.addEventListener('click', _controlClick);
+          });
+        }
+
+        // инициализация
+        _setUpListeners();
+
+        return {
+          right: function () { // метод right
+            _transformItem('right');
+          },
+          left: function () { // метод left
+            _transformItem('left');
+          }
+        }
+
+      }
+    }());
+
+    var slider = multiItemSlider('.slider')
+
+  </script>
+{% endblock %}
+
